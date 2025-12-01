@@ -1,3 +1,7 @@
+# aoc
+python/*/input*.txt
+python/*/toy*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
