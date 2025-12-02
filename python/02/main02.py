@@ -1,5 +1,6 @@
 from typing import List, Tuple
 import math
+import re
 
 def parse_product_ids(product_ids: List[str]) -> List[Tuple(str, str)]:
     return [tuple(rng.split('-')) for rng in product_ids]
@@ -16,6 +17,14 @@ def part01_invalid_id_sum(product_ids: List[str]) -> int:
 
     return sum(sum(count_invalid_ids(rng)) for rng in product_ids)
 
+def part02_invalid_id_sum(product_ids: List[str]) -> int:
+    pattern = r"(.+)\1+"
+    def count_invalid_ids(rng: Tuple[int, int]) -> int:
+        for X in range(rng[0], rng[1] + 1):
+            if bool(re.fullmatch(pattern, str(X))):
+                yield X
+            
+    return sum(sum(count_invalid_ids(tuple(map(int, rng)))) for rng in product_ids)
 
 if __name__ == "__main__":
 
@@ -25,3 +34,6 @@ if __name__ == "__main__":
     
     print ("--- Part One ---")
     print("""Sum of invalid IDs: {0}""".format(part01_invalid_id_sum(product_ids)))
+
+    print ("--- Part Two ---")
+    print("""Sum of invalid IDs: {0}""".format(part02_invalid_id_sum(product_ids)))
