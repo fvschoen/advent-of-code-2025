@@ -27,7 +27,6 @@ def part01_batteries_on(banks: List[List[int]]) -> int:
                 _ = q.pop()
                 q.appendleft(battery)
 
-        # print (int(''.join(map(str, q))))
         return int(''.join(map(str, q)))
     
     return sum(activate_bank(bank) for bank in banks)
